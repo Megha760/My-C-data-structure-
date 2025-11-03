@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next; // Pointer to next node
+};
+
+// Push operation
+void push(struct Node** top, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = *top; // Link new node to current top
+    *top = newNode;       // Update top pointer
+}
+
+// Pop operation
+int pop(struct Node** top) {
+    if (*top == NULL) return -1; // Stack underflow
+    int value = (*top)->data;
+    struct Node* temp = *top;
+    *top = (*top)->next; // Move top pointer
+    free(temp);
+    return value;
+}
+
+int main() {
+    struct Node* stack = NULL; // Top pointer
+
+    push(&stack, 10);
+    push(&stack, 20);
+    push(&stack, 30);
+
+    printf("Popped: %d\n", pop(&stack));
+    printf("Popped: %d\n", pop(&stack));
+
+    return 0;
+}
