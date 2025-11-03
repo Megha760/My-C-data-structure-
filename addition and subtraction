@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main() {
+    int arr[5] = {10, 20, 30, 40, 50};
+    int *ptr = arr;  // points to arr[0]
+
+    printf("Initial pointer points to: %d\n", *ptr);
+
+    // Pointer addition — move ahead by 3 elements
+    ptr = ptr + 3;
+    printf("After adding 3, pointer points to: %d\n", *ptr);
+
+    // Pointer subtraction — move back by 2 elements
+    ptr = ptr - 2;
+    printf("After subtracting 2, pointer points to: %d\n", *ptr);
+
+    // Two-pointer subtraction
+    int *start = &arr[0];
+    int *end = &arr[4];
+    int diff = end - start;
+
+    printf("\nPointer difference (end - start): %d elements\n", diff);
+
+    return 0;
+}
