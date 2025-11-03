@@ -1,0 +1,14 @@
+#include <stdio.h>
+
+int main() {
+    int a = 10;
+    int *p = &a;   // pointer points to a
+
+    printf("Before update: %d\n", a);
+
+    *p = 25;       // update value of a using pointer
+
+    printf("After update: %d\n", a);
+
+    return 0;
+}
