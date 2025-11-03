@@ -2,15 +2,19 @@
 #include <time.h>
 
 int main() {
+    int n = 1000000;
     clock_t start = clock();
 
-    int n = 100;
-    int result = n * 2;  // single operation
+    long long sum = 0;
+    for(int i = 0; i < n; i++) {
+        sum += i;  // loop runs n times
+    }
 
     clock_t end = clock();
-    printf("O(1) Example: Result = %d\n", result);
+    printf("O(n) Example: Sum = %lld\n", sum);
     printf("Time taken: %f seconds\n", (double)(end - start) / CLOCKS_PER_SEC);
 
     return 0;
 }
+
 
