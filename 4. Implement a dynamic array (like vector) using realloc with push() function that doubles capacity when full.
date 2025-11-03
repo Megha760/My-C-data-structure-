@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure to represent dynamic array
+typedef struct {
+    int *data;       // pointer to the actual array
+    int size;        // number of elements currently stored
+    int capacity;    // current total allocated capacity
+} DynamicArray;
+
+// Initialize the dynamic array
+void initArray(DynamicArray *arr, int initial_capacity) {
+    arr->data = (int *)malloc(initial_capacity * sizeof(int));
+    if (arr->data == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+    arr->size = 0;
+    arr->capacity = initial_capacity;
+}
+
+// Function to push a new element, doubling capacity when full
+void push(DynamicArray *arr, int value) {
+    // Check if reallocation is needed
+    if (arr->size == arr->capacity) {
+        arr->capacity *= 2; // double capacity
+        int *temp = (int *)realloc(arr->data, arr->capacity * sizeof(int));
+        if (temp == NULL) {
+            printf("Reallocation failed.\n");
+            free(arr
