@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Merge two sorted arrays into one sorted array without duplicates
+int* mergeArrays(int *a, int n1, int *b, int n2, int *mergedSize) {
+    int *merged = (int *)malloc((n1 + n2) * sizeof(int));
+    if (merged == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+
+    int i = 0, j = 0, k = 0;
+
+    // Merge while both arrays have elements
+    while (i < n1 && j < n2) {
+        if (a[i] < b[j]) {
+            // Avoid duplicates
+            if (k == 0 || merged[k - 1] != a[i])
+                merged[k++] = a[i];
