@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+    int width;
+    int height;
+    unsigned char *data;  // 1 byte per pixel (0–255 grayscale)
+} Image;
+
+// Function to allocate image
+Image* createImage(int width, int height) {
+    Image *img = (Image *)malloc(sizeof(Image));
+    if (img == NULL) {
+        printf("Memory allocation failed!\n");
+        exit(1);
+    }
+
+    img->width = width;
+    img->height = height;
+    img->data = (unsigned char *)malloc(width * height * sizeof(unsigned char));
+
+    if (img->data == NULL) {
+        printf("Memory allocation for pixels failed!\n");
+        free(img);
+        exit(1);
+    }
+
+    return img;
+}
+
+// Function to set pixel value
+void setPixel(Image *img, int x, int y, unsigned char val) {
+    if (x < 0 || x >= img->width || y < 0 || y >= img->height) {
+        printf("Invalid pixel coordinate (%d,%d)\n", x, y);
+        return;
+    }
+    img->data[y * img->width + x] = val;
+}
+
+// Function to get pixel value
+unsigned char getPixel(const Image *img, int x, int y) {
+    if (x < 0 || x >= img->width || y < 0 || y >= img->height) {
+        printf("Invalid pixel coordinate (%d,%d)\n", x, y);
+        return 0;
+    }
+    return img->data[y * img->width + x];
+}
+
+// Print the image matrix
+void printImage(const Image *img) {
+    printf("\nImage Matrix (%dx%d):\n", img->width, img->height);
+    for (int y = 0; y < img->height; y++) {
+        for (int x = 0; x < img->width; x++) {
+            printf("%3d ", getPixel(img, x, y));
+        }
+        printf("\n");
+    }
+}
+
+// Free image memory
+void freeImage(Image *img) {
+    free(img->data);
+    free(img);
+}
+
+int main() {
+    int W, H;
+    printf("Enter image width and height: ");
+    scanf("%d %d", &W, &H);
+
+    Image *img = createImage(W, H);
+
+    // Set some pixel values (example)
+    printf("\nEnter pixel values row by row:\n");
+    for (int y = 0; y < H; y++) {
+        for (int x = 0; x < W; x++) {
+            int val;
+            scanf("%d", &val);
+            setPixel(img, x, y, (unsigned char)val);
+        }
+    }
+
+    // Print the image
+    printImage(img);
+
+    // Free allocated memory
+    freeImage(img);
+
+    return 0;
+}
