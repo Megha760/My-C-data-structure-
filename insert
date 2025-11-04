@@ -1,0 +1,17 @@
+#include<stdio.h>
+#define CAP 10
+int main(){
+    int a[CAP]={1,2,3,};
+    int n = 3;
+    int value = 7;
+    if(n<CAP){
+        a[n]=value;
+        n++;
+    }
+    else{
+        printf("array is full prekSHsaka");
+    }
+    for(int i =0; i<n;i++){
+        printf("%d ",a[i]);
+    }
+}
