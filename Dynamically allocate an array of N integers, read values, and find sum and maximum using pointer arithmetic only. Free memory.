@@ -5,14 +5,36 @@ int main() {
     int N;
     int *arr, *ptr;
     int sum = 0, max;
-    printf("Enter number of elements (N): ");
+
+    printf("Enter number of elements: ");
     scanf("%d", &N);
+
+    // Dynamically allocate memory
     arr = (int *)malloc(N * sizeof(int));
     if (arr == NULL) {
-        printf("Memory allocation failed.\n");
+        printf("Memory allocation failed!\n");
         return 1;
     }
+
+    // Read values
     printf("Enter %d integers:\n", N);
     for (ptr = arr; ptr < arr + N; ptr++) {
         scanf("%d", ptr);
     }
+
+    // Initialize max and calculate sum
+    max = *arr;  // first element
+    for (ptr = arr; ptr < arr + N; ptr++) {
+        sum += *ptr;
+        if (*ptr > max)
+            max = *ptr;
+    }
+
+    printf("Sum = %d\n", sum);
+    printf("Maximum = %d\n", max);
+
+    // Free allocated memory
+    free(arr);
+
+    return 0;
+}
