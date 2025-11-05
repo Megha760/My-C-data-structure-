@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+int data;
+struct Node* next;
+};
+struct Node* head = NULL;
+void insertBegin(int value) {
+struct Node* newNode = malloc(sizeof(struct Node));
+newNode->data = value;
+newNode->next = head;
+head = newNode;
+}
+void display() {
+struct Node* temp = head;
+while(temp != NULL) {
+printf("%d -> ", temp->data);
+temp = temp->next;
+}
+printf("NULL\n");
+}
+int main() {
+insertBegin(80);
+insertBegin(720);
+insertBegin(730);
+insertBegin(70);
+display(); 
+return 0;
+}
